@@ -50,7 +50,5 @@ public class Cart {
 		}
 		public void setBill(Float bill) {
 			this.bill = bill;
-		}
-	    
-	    
+		}   
 }

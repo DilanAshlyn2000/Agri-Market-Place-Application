@@ -1,5 +1,15 @@
 package com.chainsys.agrimarketplace.dao;
 
-public class UserDao {
+import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+import com.chainsys.agrimarketplace.model.User;
+
+@Repository
+public interface UserDao {
+	public void insertUser(User user);
+	public User loginUser(String email);
+	public List<User> getAllUsers();
+	public List<User> searchUser(String name) ;
 }
