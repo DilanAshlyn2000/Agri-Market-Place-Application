@@ -9,6 +9,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
 /* TEMPLATE STYLES */
@@ -40,6 +41,7 @@ footer.page-footer {
 	background-color: #414a5c;
 	margin-top: 2rem;
 }
+
 </style>
 </head>
 <body>
@@ -48,7 +50,7 @@ footer.page-footer {
 		<!--Navbar-->
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 			<div class="container">
-				<a class="navbar-brand" href="#"> <strong>Navbar</strong>
+				<a class="navbar-brand" href="#"> <strong>AgriMarketPlace</strong>
 				</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav1"
@@ -67,8 +69,8 @@ footer.page-footer {
 							data-bs-toggle="dropdown" aria-expanded="false"> More info </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" href="#">Our Team</a></li>
-								<li><a class="dropdown-item" href="#">Our Company</a></li>
+								<li><a class="dropdown-item" href="ourPeople.jsp">Our Team</a></li>
+								<li><a class="dropdown-item" href="ourCommunity.jsp">Our Company</a></li>
 
 							</ul></li>
 					</ul>
@@ -121,22 +123,12 @@ footer.page-footer {
 											placeholder="Enter Email" required>
 
 									</div>
-									<div class="mb-3">
+									 <div class="mb-3">
 										<label for="form2" class="form-label">Your password</label> <input
 											type="password" class="form-control" name="password"
 											id="form2" placeholder="Enter Password">
-									</div>
-									<%
-									String error = request.getParameter("error");
-									%>
-									<%
-									if (error != null && error.equals("1")) {
-									%>
-									<div class="alert alert-danger" role="alert">Invalid
-										Email or Password</div>
-									<%
-									}
-									%>
+									</div>  
+								
 									<button type="submit" class="btn btn-primary">
 										<center>Submit</center>
 									</button>

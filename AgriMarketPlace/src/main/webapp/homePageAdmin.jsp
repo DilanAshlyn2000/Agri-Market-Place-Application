@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
@@ -162,4 +162,175 @@ h1 {
 		src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 		alt="image" width="100%" height="650" class="img2">
 </body>
+</html>  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrimarketplace Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px auto;
+            grid-template-rows: 100vh; /* Adjust height as needed */
+            grid-template-areas: 
+                "sidebar main-content";
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+            background:black;
+            /* Adjust gradient colors as per your preference */
+            color: #fff;
+            padding: 20px;
+            height: 100vh; /* Adjust height to fit viewport */
+            overflow-y: auto; /* Enable scrolling for long content */
+            display: flex;
+            flex-direction: column; /* Ensure contact details stay at the bottom */
+            align-items: center; /* Center items vertically */
+        }
+
+        .sidebar .logo {
+            margin-bottom: 20px;
+        }
+
+        .sidebar .logo img {
+            width: 100px; /* Adjust logo size as needed */
+            height: auto;
+            border-radius: 50%; /* Make logo round */
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            /* Adjust hover background color */
+        }
+
+        .sidebar ul li a .fa {
+            margin-right: 10px;
+        }
+
+        .contact-details {
+            margin-top: auto; /* Push contact details to the bottom */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+            width: 100%; /* Ensure contact details stretch across */
+            text-align: center; /* Center text */
+        }
+
+        .contact-details h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .contact-details p {
+            font-size: 14px;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            grid-area: main-content;
+            padding: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: auto;
+                grid-template-areas: 
+                    "main-content"
+                    "sidebar";
+            }
+
+            .sidebar {
+                height: auto;
+                max-height: 60vh; /* Limit height on smaller screens */
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+        }
+        .main-content {
+            grid-area: main-content;
+            padding: 20px;
+            background-image: url('pictures/f3.jpg'); /* Replace with your image path */
+            background-size: cover; /* Cover the entire area */
+            background-position: center; /* Center the background image */
+            color: #333; /* Text color for better readability on background */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="pictures/Screenshot (188).png" alt="Agrimarketplace Logo">
+            </div>
+            <h2>Agrimarketplace</h2>
+            <ul>
+                <li><a href="/displayUser"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="addCategory.jsp"><i class="fas fa-th"></i> Categories</a></li>
+                <li><a href="addProduct.jsp"><i class="fas fa-plus"></i> Add Product</a></li>
+                <li><a href="#my-products"><i class="fas fa-box"></i> My Products</a></li>
+            </ul>
+            <div class="contact-details">
+                <h3>Contact Details</h3>
+                <p>Email: milan01@admin.com</p>
+                <p>Phone: 9987656743</p>
+            </div>
+        </div>
+       <div class="main-content">
+            <!-- Main content here -->
+           
+             </div>
+    </div>
+   
+</body>
 </html>
+
+
+
+

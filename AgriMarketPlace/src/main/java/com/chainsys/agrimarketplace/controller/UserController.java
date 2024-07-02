@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.agrimarketplace.dao.UserDao;
+import com.chainsys.agrimarketplace.model.Category;
 import com.chainsys.agrimarketplace.model.User;
 
 @Controller
@@ -53,7 +54,6 @@ public class UserController {
 		}
 
 		else {
-			// return "redirect:/homePageUser.jsp?error=1";
 			return "registrationPage.jsp";
 		}
 
@@ -74,5 +74,34 @@ public class UserController {
 		model.addAttribute("users", users);
 		return "userDisplay.jsp";
 	}
-
+	
+	 @GetMapping("/delete")
+	 public String delete(@RequestParam("id") int id, Model model) { 
+		 User user = new User();
+		 user.setId(id); 
+		 userDao.delete(user);
+	  List<User> users = userDao.getAllUsers();
+	  model.addAttribute("users", users);
+	  return "userDisplay.jsp";
+	  }
+	
+	 @GetMapping("/category")
+		public String saveCategory(@RequestParam("category") String categoryName, @RequestParam("fileToUpload") byte[] categoryImage, Model model) {
+			Category category = new Category();
+			category.setCategoryName(categoryName);
+			category.setCategoryImage(categoryImage);
+			userDao.insertCategory(category);
+			return "homePageAdmin.jsp";
+		
+	 }
+	
+	 @GetMapping("/displayCategory")
+		public String getAllCategory(Model model) {
+			System.out.println("getting datas");
+			List<Category> category = userDao.getAllCategory();
+			System.out.println(users);
+			model.addAttribute("users", users);
+			return "userCategory.jsp";
+		}	
 }
+

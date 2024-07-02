@@ -148,25 +148,25 @@ img.img2 {
 		</div>
 		<form action="/register" method="get">
 			<div class="text6">
-				<label for="name">Name:</label> <input type="text" id="name"
-					name="name" placeholder="Enter Name" required> <label
-					for="type">Type:</label> <select name="type" id="type"="[0-9]+">
+				<label for="name">Name:</label> 
+				<input type="text" id="name" name="name" placeholder="Enter Name" required> 
+				<label for="type">Type:</label>
+				 <select name="type" id="type"="[0-9]+">
 
 					<option value="user">BUYER</option>
 					<option value="farmer">AGRICULTURAL PRODUCERS</option>
 					<option value="admin">OTHERS</option>
 
-				</select> <br> <br> <label for="phone">Phone Number:</label> <input
-					type="tel" id="phone" name="phone" placeholder="Enter Phone Number"
-					pattern="[0-9]{10}" required> <label for="email">Email:</label>
-				<input type="email" id="email" name="email"
-					placeholder="Enter Email" required> <label for="address">Address:</label>
-				<textarea id="address" name="address" rows="2"
-					placeholder="Enter Address" required></textarea>
-				<label for="password">Password:</label> <input type="password"
-					id="password" name="password" placeholder="Enter Password"
-					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required> <input
-					type="submit" value="Register">
+				</select> <br> <br>
+				 <label for="phone">Phone Number:</label> 
+				 <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" pattern="[796][0-9]{9}" required>
+				  <label for="email">Email:</label>
+				<input type="email" id="email" name="email" placeholder="Enter Email" required>
+				 <label for="address">Address:</label>
+				<textarea id="address" name="address" rows="2" placeholder="Enter Address" required></textarea>
+				<label for="password">Password:</label> 
+				<input type="password" id="password" name="password" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+				 <input type="submit" value="Register"  onclick="validation()">
 			</div>
 		</form>
 
@@ -178,5 +178,28 @@ img.img2 {
 			Your browser does not support the video tag.
 		</video>
 	</div>
+	<script type="text/javascript">
+function validation(){
+	var name=document.getElementById("name");
+var grade=document.getElementById("phone");
+var grade=document.getElementById("password");
+
+if(!name.checkValidity())
+{
+    alert("Name should be alphabet.");
+    return;
+}
+if(!phone.checkValidity())
+{
+    alert("Phone number should be 10 digits starting with 9,7 or 6");
+    return;
+}
+if(!password.checkValidity())
+{
+    alert("Password should consist of atleast 1 Uppercase, 1 Lowercase, 1 Speacial character, 1 digit and minimun 8 characters");
+    return;
+}
+}
+</script>
 </body>
 </html>
