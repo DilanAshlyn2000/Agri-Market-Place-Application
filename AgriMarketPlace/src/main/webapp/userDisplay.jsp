@@ -81,6 +81,7 @@ button:hover {
 	font-family: bold;
 	font-size: 18px;
 }
+
 </style>
 
 <body>
@@ -95,7 +96,6 @@ button:hover {
 			placeholder="Enter name...">
 		<button>Search</button>
 	</form>
-
 	<table>
 		<thead>
 			<tr>
@@ -129,7 +129,7 @@ button:hover {
 				</td>
 				<td>
 
-					<form action="/delete" method="get">
+					<form action="/deleteUser" method="get">
 						<input type="hidden" name="id" value="<%= user.getId()%>">
 						<button>Delete</button>
 					</form>

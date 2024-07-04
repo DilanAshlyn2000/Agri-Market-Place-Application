@@ -10,9 +10,9 @@
             background-color: #f0f0f0;
             padding: 20px;
             display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            height: 100vh; /* Full viewport height */
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
             overflow:hidden;
         }
         
@@ -33,7 +33,7 @@
         }
         
         input[type="text"], input[type="file"] {
-            width: calc(100% - 22px); /* Adjust width to fit within the fieldset */
+            width: calc(100% - 22px); 
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -43,11 +43,11 @@
             display: inline-block;
         }
         
-        /* Style the file input button */
+       
         input[type="file"] {
-            border: none; /* Remove default border */
-            background-color: #007bff; /* Blue background */
-            color: #fff; /* White text color */
+            border: none;
+            background-color: #007bff; 
+            color: #fff; 
             padding: 10px 20px;
             cursor: pointer;
             border-radius: 5px;
@@ -80,14 +80,14 @@
 </head>
 <body>
     <fieldset>
-      <form action="/category" method="get">
+      <form action="/category" method="post" enctype="multipart/form-data">
             <label for="category">CATEGORY:</label><br>
             <input type="text" id="category" name="category" placeholder="Enter Category" required autofocus><br><br>
             
             <label for="photo">Upload Photo:</label>
-            <input type="file" name="fileToUpload" id="fileToUpload" >
+            <input type="file" name="fileToUpload" id="fileToUpload"  >
             
-            <br><br>
+            <br> <br>
             <input type="submit" value="ADD" class="sub">
         </form>
     </fieldset>

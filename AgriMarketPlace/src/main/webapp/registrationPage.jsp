@@ -56,14 +56,13 @@ video {
 	background-position: center; */
 }
 
-/* Style for the form heading */
+
 .form-container h2 {
 	margin-bottom: 20px;
 	text-align: center;
 	color: black;
 }
 
-/* Style for labels */
 .form-container label {
 	display: block;
 	margin-bottom: 6px;
@@ -71,7 +70,7 @@ video {
 	font-weight: bold;
 }
 
-/* Style for input fields */
+
 .form-container input[type="text"], .form-container input[type="tel"],
 	.form-container input[type="email"], .form-container input[type="password"],
 	.form-container select, .form-container textarea {
@@ -81,10 +80,9 @@ video {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-sizing: border-box;
-	/* Ensure padding and border are included in the width */
+	
 }
 
-/* Style for submit button */
 .form-container input[type="submit"] {
 	width: 100%;
 	padding: 10px;
@@ -96,7 +94,6 @@ video {
 	cursor: pointer;
 }
 
-/* Style for submit button on hover */
 .form-container input[type="submit"]:hover {
 	background-color: black;
 }
@@ -149,7 +146,7 @@ img.img2 {
 		<form action="/register" method="get">
 			<div class="text6">
 				<label for="name">Name:</label> 
-				<input type="text" id="name" name="name" placeholder="Enter Name" required> 
+				<input type="text" id="name" name="name" placeholder="Enter Name" pattern="^[a-zA-Z\\s]+$" required> 
 				<label for="type">Type:</label>
 				 <select name="type" id="type"="[0-9]+">
 
