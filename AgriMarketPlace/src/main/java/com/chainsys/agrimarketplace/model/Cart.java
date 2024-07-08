@@ -2,12 +2,12 @@ package com.chainsys.agrimarketplace.model;
 
 public class Cart {
     	int cartId;
-	    int  customerId;
+	    int customerId;
 	    int productId;
 	    int quantity;
 	    float unitPrice;
 	    float total;
-	    //Product product;
+	    Product product;
 	    Float bill;
 		public int getCartId() {
 			return cartId;
@@ -50,5 +50,11 @@ public class Cart {
 		}
 		public void setBill(Float bill) {
 			this.bill = bill;
+		}
+		public Product getProduct() {
+			return product;
+		}
+		public void setProduct(Product product) {
+			this.product = product;
 		}   
 }

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.chainsys.agrimarketplace.controller.validation.ProductValidation;
 import com.chainsys.agrimarketplace.controller.validation.Validation;
 import com.chainsys.agrimarketplace.dao.UserDao;
+import com.chainsys.agrimarketplace.model.Cart;
 import com.chainsys.agrimarketplace.model.Category;
 import com.chainsys.agrimarketplace.model.Product;
 import com.chainsys.agrimarketplace.model.User;
@@ -73,7 +74,7 @@ public class UserController {
 				return "homePageAdmin.jsp";
 			}
 			if (user.getType().equals("farmer")) {
-				return "homePageFarmer.jsp";
+				return "farmerDashBoard.jsp";
 			}
 			if (user.getType().equals("user")) {
 				return "homePageUser.jsp";
@@ -226,4 +227,48 @@ public class UserController {
 		model.addAttribute("lists", products);
 		return "productsView.jsp";
 	}
+	@GetMapping("/displayProducts")
+	public String getAllProducts(Model model) {
+		List<Product> products = userDao.getAllProducts();
+		model.addAttribute("productList", products);
+		return "displayProductUser.jsp";
+	}
+	@GetMapping("/searchCategory")
+	public String searchCategory(@RequestParam("type") Integer categoryId, Model model) {
+		List<Product> productList = userDao.searchCategory(categoryId);
+		model.addAttribute("productList", productList);
+		return "displayProductUser.jsp";
+	}
+	
+	 @GetMapping("/displayProductsLowToHigh")
+	  public String getAllProductsLowToHigh(@RequestParam("type")Integer categoryId, @RequestParam("price1") Float price, Model model) { 
+		  List<Product> products =userDao.getAllProductsLowToHigh( price,categoryId);
+		  model.addAttribute("productList",products);
+		  return "displayProductUser.jsp";   
 }
+	 @GetMapping("/displayProductsHighToLow")
+	  public String getAllProductsHighToLow(@RequestParam("type")Integer categoryId, @RequestParam("price1") Float price, Model model) { 
+		  List<Product> products =userDao.getAllProductsHighToLow( price,categoryId);
+		  model.addAttribute("productList",products);
+		  return "displayProductUser.jsp";  
+	 }
+	 @GetMapping("/insertCart")
+	    public String insertCart(@RequestParam("category_id") int customerId, @RequestParam("productId") int productId,@RequestParam("quantity") int quantity,@RequestParam("price") float total,@RequestParam("action") String action, Model model ) {
+		Cart cart=new Cart();
+		cart.setCustomerId(customerId);
+		cart.setProductId(productId);
+		cart.setQuantity(quantity);
+		cart.setTotal(total);	
+		userDao.insertCart(customerId,productId,quantity, total,action);
+		List<Category> category = userDao.getAllCategory();
+		model.addAttribute("lists", category);
+		return "displayCategory.jsp";
+     }
+	/*	@GetMapping("/displayCart")
+		public String getAllCartDetails(Model model) {
+			List<Product> products = userDao.getAllCartDetails();
+			model.addAttribute("productList", products);
+			return "cartPage.jsp";
+		}*/
+}
+

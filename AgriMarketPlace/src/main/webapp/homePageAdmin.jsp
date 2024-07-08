@@ -132,8 +132,7 @@
             background-size: cover;
             background-position: center; 
             color: #333; 
-        }
-        
+        }      
     </style>
 </head>
 <body>
@@ -145,10 +144,10 @@
             <h2>Agrimarketplace</h2>
             <ul>
                 <li><a href="/displayUser"><i class="fas fa-user"></i> Profile</a></li>
-                <li><a href="addCategory.jsp"><i class="fas fa-th"></i> Categories</a></li>
-                <li><a href="addProduct.jsp"><i class="fas fa-plus"></i> Add Product</a></li>
-                <li><a href="/displayCategory"><i class="fas fa-box"></i> My Products</a></li>
-                <li><a href="/displayProduct">All Products</a></li>
+                <li><a href="addCategory.jsp"><i class="fas fa-th"></i> Add Categories</a></li>
+               <!--  <li><a href="addProduct.jsp"><i class="fas fa-plus"></i> Add Product</a></li> -->
+                <li><a href="/displayCategory"><i class="fas fa-box"></i> View Categories</a></li>
+                <li><a href="/displayProduct"><i class="fas fa-box"></i>View Products</a></li>
              </ul>
             <div class="contact-details">
                 <h3>Contact Details</h3>

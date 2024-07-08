@@ -143,10 +143,10 @@ nav {
 			<label for="categoryId">Category:</label>
 			<select id="categoryId" name="categoryId" required>
 				<option value="">Select Category</option>
-				<option value="1">Vegetables</option>
-				<option value="2">Fruits</option>
-				<option value="6">Flowers</option>
-				<option value="7">Nuts</option>
+				<option value="2">Vegetables</option>
+				<option value="1">Fruits</option>
+				<option value="4">GRAINS & CEREALS</option>
+				<option value="3">Nuts</option>
 			</select>
 			
 			<label for="photo">Upload Photo:</label>

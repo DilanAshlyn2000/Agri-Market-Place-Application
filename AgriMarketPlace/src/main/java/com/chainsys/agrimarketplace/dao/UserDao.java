@@ -31,4 +31,16 @@ public interface UserDao {
 	public List<Product> getAllProduct();
 
 	public void deleteProduct(Product product);
+	
+	public List<Product> getAllProducts();
+	
+	public List<Product> searchCategory(int categoryId);
+	
+	public List<Product> getAllProductsLowToHigh(Float price,int categoryId);
+	
+	public List<Product> getAllProductsHighToLow(Float price,int categoryId);
+	
+	public void insertCart(int customerId, int productId, int quantity, float total, String action);
+	
+	//public List<Product> getAllCartDetails();
 }

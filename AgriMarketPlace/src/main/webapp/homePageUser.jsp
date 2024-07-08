@@ -54,7 +54,7 @@ colour:white;
 				<div class="collapse navbar-collapse" id="navbarNav1">
 					<ul class="navbar-nav me-auto">
 						<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Market</a>
+						<li class="nav-item"><a class="nav-link" href="marketView.jsp">Market</a>
 						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
@@ -85,12 +85,11 @@ colour:white;
 						<h4>Categories:</h4>
 						<br>
 						<div class="list-group">
-							<a href="#" class="list-group-item list-group-item-action active"
-								aria-current="true">Categories</a> <a href="#"
-								class="list-group-item list-group-item-action">Vegetables</a> <a
-								href="#" class="list-group-item list-group-item-action">Fruits</a>
-							<a href="#" class="list-group-item list-group-item-action">Flowers</a>
-							<a href="#" class="list-group-item list-group-item-action">Nuts</a>
+							<a href="#" class="list-group-item list-group-item-action active" aria-current="true">Categories</a> 
+							<a href="#"class="list-group-item list-group-item-action"  onclick="selectCategory(2)">Vegetables</a>
+							 <a href="#" class="list-group-item list-group-item-action"   onclick="selectCategory(1)">Fruits</a>
+							<a href="#" class="list-group-item list-group-item-action"   onclick="selectCategory(4)">Grains & Cereals</a>
+							<a href="#" class="list-group-item list-group-item-action"   onclick="selectCategory(3)">Nuts</a>
 						</div>
 					</div>
 					<div class="widget-wrapper">
@@ -229,5 +228,10 @@ colour:white;
 	<script>
 		new WOW().init();
 	</script>
+	<script>
+    function selectCategory(categoryId) {
+    window.location.href = '/searchCategory?type=' + categoryId;
+    }
+</script>
 </body>
 </html>

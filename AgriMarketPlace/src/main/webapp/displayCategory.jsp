@@ -64,7 +64,8 @@ h1 {
 
 .card-body img {
     max-width: 100%;
-    height: auto;
+    height: 200px;
+    width:600px;
     display: block;
     margin: 10px auto;
     border-radius: 5px;

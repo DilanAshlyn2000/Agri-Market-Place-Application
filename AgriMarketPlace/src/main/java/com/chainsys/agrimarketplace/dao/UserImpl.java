@@ -3,6 +3,7 @@ package com.chainsys.agrimarketplace.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,7 @@ import com.chainsys.agrimarketplace.mapper.UserMapper;
 import com.chainsys.agrimarketplace.mapper.UserDisplayMapper;
 import com.chainsys.agrimarketplace.mapper.CategoryMapper;
 import com.chainsys.agrimarketplace.mapper.ProductMapper;
+import com.chainsys.agrimarketplace.model.Cart;
 import com.chainsys.agrimarketplace.model.Category;
 import com.chainsys.agrimarketplace.model.Product;
 import com.chainsys.agrimarketplace.model.User;
@@ -93,4 +95,68 @@ public class UserImpl implements UserDao {
 		jdbcTemplate.update(delete, params);
 
 	}
+	
+	public List<Product> getAllProducts() {
+		String select =  "select product_id, product_name,product_image, farmer_id, description, price, stock_quantity, category_id from Products ";
+		List<Product> productList = jdbcTemplate.query(select, new ProductMapper());
+		System.out.println(productList);
+		return productList;
+	}
+
+	public List<Product> searchCategory(int categoryId) {
+		String retrive = "SELECT product_id, product_name, product_image, farmer_id, description, price, stock_quantity, category_id FROM Products WHERE category_id=?";			
+		return jdbcTemplate.query(retrive, new ProductMapper(),categoryId);
+	}
+	
+	
+	
+	public List<Product> getAllProductsLowToHigh(Float price,int categoryId) { 
+		 String select = "SELECT product_id, product_name, product_image, farmer_id, description, price, stock_quantity, category_id FROM Products WHERE category_id = ? ORDER BY price ASC;" ;
+		 List<Product> productList = jdbcTemplate.query(select, new ProductMapper(),categoryId); 
+		 System.out.println(productList); 
+		 return productList;
+		 }
+	public List<Product> getAllProductsHighToLow(Float price,int categoryId) { 
+		 String select = "SELECT product_id, product_name, product_image, farmer_id, description, price, stock_quantity, category_id FROM Products WHERE category_id = ? ORDER BY price DESC;" ;
+		 List<Product> productList = jdbcTemplate.query(select, new ProductMapper(),categoryId); 
+		 System.out.println(productList); 
+		 return productList;
+		 }
+	
+	@SuppressWarnings({ "deprecation" })
+	public void insertCart(int customerId, int productId, int quantity, float total, String action) {
+	    String selectQuery = "SELECT quantity, total FROM cart WHERE customer_id = ? AND product_id = ?";
+	    String updateQuery = "UPDATE cart SET quantity = ?, total = ?, timestamp = CURRENT_TIMESTAMP WHERE customer_id = ? AND product_id = ?";
+	    String insertQuery = "INSERT INTO cart (customer_id, product_id, quantity, total, status, timestamp) VALUES (?, ?, ?, ?, 'UNPAID', CURRENT_TIMESTAMP)";
+
+	    Cart cartEntry = null;
+	    try {
+	        cartEntry = jdbcTemplate.queryForObject(selectQuery, new Object[]{customerId, productId}, (rs, rowNum) -> {
+	            Cart cart = new Cart();
+	            cart.setQuantity(rs.getInt("quantity"));
+	            cart.setTotal(rs.getFloat("total"));
+	            return cart;
+	        });
+	    } catch (EmptyResultDataAccessException e) {
+	    }
+
+	    if (cartEntry != null) {
+	        int existingQuantity = cartEntry.getQuantity();
+	        int newQuantity = action.equals("add") ? existingQuantity + quantity : existingQuantity - quantity;
+	        float newTotal = total * newQuantity;
+	        jdbcTemplate.update(updateQuery, newQuantity, newTotal, customerId, productId);
+	        System.out.println("Updating existing entry in the cart.");
+	    } else {
+	       jdbcTemplate.update(insertQuery, customerId, productId, quantity, total);
+	        System.out.println("Inserting new entry into the cart.");
+	    }
+	}
+	/*public List<Product> getAllCartDetails() {
+		String select =  "SELECT p.product_id,p.product_name, p.product_image, p.price, c.cart_id, c.quantity, (p.price * c.quantity) AS total "
+				+ "FROM Products p " + "JOIN Cart c ON p.product_id = c.product_id "
+				+ "WHERE status='UNPAID'";
+		List<Product> productList = jdbcTemplate.query(select, new ProductMapper());
+		System.out.println(productList);
+		return productList;
+	}*/
 }

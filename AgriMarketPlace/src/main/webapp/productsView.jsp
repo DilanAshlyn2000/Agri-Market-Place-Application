@@ -134,7 +134,11 @@
     .nav-links li a:hover {
       color: olive;
     }
-  
+    .product-image {
+    width: 100px; /* Adjust the width as per your requirement */
+    height: 80px; /* Maintain aspect ratio */
+}
+
 </style>
 </head>
 <body>
@@ -163,7 +167,7 @@
             <tr>
                <%--  <td><%= product.getProductId() %></td> --%>
                 <td><%= product.getProductName() %></td>
-                <td><img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(product.getProductImage()) %>" alt="Product Image" style="max-width: 100px; max-height: 100px;"></td>
+                <td><img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(product.getProductImage()) %>" alt="Product Image" class="product-image"></td>
                 <td><%= product.getFarmerId() %></td>
                 <td><%= product.getDescription() %></td>
                 <td><%= product.getPrice() %></td>
