@@ -120,7 +120,6 @@ h1 {
 		
 	</div>
     <div class="container">
-  
         <% List<Category> categories = (ArrayList<Category>) request.getAttribute("lists");
            for (Category category : categories) { %>
                <div class="card">

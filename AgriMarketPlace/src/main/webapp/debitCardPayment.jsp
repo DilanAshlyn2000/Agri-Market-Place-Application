@@ -102,7 +102,6 @@ input[type="submit"]:hover {
 			<label for="cvv">CVV/CVC:</label> <input type="text" id="cvv"
 				name="cvv" maxlength="4" placeholder="123" pattern="[0-9]{3}"
 				required>
-
 			<center>
 				<button type="submit">Submit Payment</button>
 			</center>

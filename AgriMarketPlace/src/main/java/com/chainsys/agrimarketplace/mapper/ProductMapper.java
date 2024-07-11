@@ -18,5 +18,5 @@ public class ProductMapper implements RowMapper<Product> {
 		product.setStockQuantity(resultSet.getInt("stock_quantity"));
 		product.setCategoryId(resultSet.getInt("category_id"));
 		return product;
-	}
+   }
 }

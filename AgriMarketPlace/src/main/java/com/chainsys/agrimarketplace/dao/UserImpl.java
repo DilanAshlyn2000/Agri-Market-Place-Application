@@ -1,9 +1,6 @@
 package com.chainsys.agrimarketplace.dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,8 +24,7 @@ public class UserImpl implements UserDao {
 
 	public void insertUser(User user) {
 		String save = "insert into users(name,type,phone, email, address, password) values (?,?,?,?,?,?)";
-		Object[] params = { user.getName(), user.getType(), user.getPhone(), user.getEmail(), user.getAddress(),
-				user.getPassword() };
+		Object[] params = { user.getName(), user.getType(), user.getPhone(), user.getEmail(), user.getAddress(),user.getPassword() };
 		jdbcTemplate.update(save, params);
 
 	}
@@ -64,7 +60,6 @@ public class UserImpl implements UserDao {
 		String save = "insert into categories(category_name,category_image) values (?,?)";
 		Object[] params = { category.getCategoryName(), category.getCategoryImage() };
 		int update = jdbcTemplate.update(save, params);
-
 	}
 
 	public List<Category> getAllCategory() {
@@ -77,7 +72,6 @@ public class UserImpl implements UserDao {
 		String delete = "delete from categories where category_id=?";
 		Object[] params = { category.getCategoryId() };
 		jdbcTemplate.update(delete, params);
-
 	}
 
 	public void insertProduct(Product product) {
@@ -120,6 +114,7 @@ public class UserImpl implements UserDao {
 		 System.out.println(productList); 
 		 return productList;
 		 }
+	
 	public List<Product> getAllProductsHighToLow(Float price,int categoryId) { 
 		 String select = "SELECT product_id, product_name, product_image, farmer_id, description, price, stock_quantity, category_id FROM Products WHERE category_id = ? ORDER BY price DESC;" ;
 		 List<Product> productList = jdbcTemplate.query(select, new ProductMapper(),categoryId); 
@@ -132,7 +127,6 @@ public class UserImpl implements UserDao {
 	    String selectQuery = "SELECT quantity, total FROM cart WHERE customer_id = ? AND product_id = ?";
 	    String updateQuery = "UPDATE cart SET quantity = ?, total = ?, timestamp = CURRENT_TIMESTAMP WHERE customer_id = ? AND product_id = ?";
 	    String insertQuery = "INSERT INTO cart (customer_id, product_id, quantity, total, status, timestamp) VALUES (?, ?, ?, ?, 'UNPAID', CURRENT_TIMESTAMP)";
-
 	    Cart cartEntry = null;
 	    try {
 	        cartEntry = jdbcTemplate.queryForObject(selectQuery, new Object[]{customerId, productId}, (rs, rowNum) -> {
@@ -156,6 +150,7 @@ public class UserImpl implements UserDao {
 	        System.out.println("Inserting new entry into the cart.");
 	    }
 	}
+
 	public List<Cart> getAllCartDetails(int customerId) {
 		String select =  "SELECT p.product_id,p.product_name, p.product_image, p.price, c.cart_id, c.quantity, (p.price * c.quantity) AS total "
 				+ "FROM products p " + "JOIN cart c ON p.product_id = c.product_id "
@@ -163,17 +158,15 @@ public class UserImpl implements UserDao {
 		List<Cart> productList =  jdbcTemplate.query(select,new CartMapper(),customerId);
 		return productList;
 	}
+	
 	public void deleteCartById(int cartId) {
         String deleteQuery = "DELETE FROM cart WHERE cart_id = ?";
         jdbcTemplate.update(deleteQuery, cartId);
     }
-	//@Transactional(rollbackFor = SQLException.class)
+	
     public void updateStatus(Cart add1)  {
-        // Update Cart status to 'PAID'
         String updateCart = "UPDATE cart SET status = 'PAID' WHERE customer_id = ?";
         jdbcTemplate.update(updateCart, add1.getCustomerId());
-
-        // Retrieve Cart items with status 'PAID'
         String selectCartItems = "SELECT product_id, quantity FROM cart WHERE customer_id = ? AND status = 'PAID'";
         List<Cart> cartItems = jdbcTemplate.query(selectCartItems, (rs, rowNum) -> {
             Cart item = new Cart();
@@ -181,8 +174,6 @@ public class UserImpl implements UserDao {
             item.setQuantity(rs.getInt("quantity"));
             return item;
         }, add1.getCustomerId());
-
-        // Update Products table for each cart item
         String updateProduct = "UPDATE products SET stock_quantity = stock_quantity - ? WHERE product_id = ?";
         for (Cart item : cartItems) {
             jdbcTemplate.update(updateProduct, item.getQuantity(), item.getProductId());

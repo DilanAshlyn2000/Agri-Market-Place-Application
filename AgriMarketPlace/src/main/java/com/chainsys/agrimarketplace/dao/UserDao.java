@@ -1,5 +1,4 @@
 package com.chainsys.agrimarketplace.dao;
-
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -32,20 +31,20 @@ public interface UserDao {
 	public List<Product> getAllProduct();
 
 	public void deleteProduct(Product product);
-	
+
 	public List<Product> getAllProducts();
-	
+
 	public List<Product> searchCategory(int categoryId);
-	
-	public List<Product> getAllProductsLowToHigh(Float price,int categoryId);
-	
-	public List<Product> getAllProductsHighToLow(Float price,int categoryId);
-	
+
+	public List<Product> getAllProductsLowToHigh(Float price, int categoryId);
+
+	public List<Product> getAllProductsHighToLow(Float price, int categoryId);
+
 	public void insertCart(int customerId, int productId, int quantity, float total, String action);
-	
+
 	public List<Cart> getAllCartDetails(int customerId);
-	
+
 	public void deleteCartById(int cartId);
-	
-	  public void updateStatus(Cart add1) ;
+
+	public void updateStatus(Cart add1);
 }

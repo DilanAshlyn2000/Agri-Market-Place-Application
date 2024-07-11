@@ -197,7 +197,6 @@ select {
 						<p>
 							<strong>Stock Quantity(in Kgs):</strong>
 							<%=product.getStockQuantity()%></p>
-						<!-- <form action="" method="get"> -->
 							<div class="quantity-container">
 								<label for="quantity" class="quantity-label">Quantity:</label> 
 								  <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-input">
@@ -211,7 +210,6 @@ select {
 							</div>
 					 </form>
 				   </div>
-				<!-- </form> -->
 			</div>
 			<%
             }

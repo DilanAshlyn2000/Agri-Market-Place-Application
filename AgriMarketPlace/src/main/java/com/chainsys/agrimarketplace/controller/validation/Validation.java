@@ -1,6 +1,7 @@
 package com.chainsys.agrimarketplace.controller.validation;
 
 public class Validation {
+	
 	public static boolean isValidName(String name) {
 		return name != null && !name.isEmpty() && name.matches("[a-zA-Z\\s]+");
 	}

@@ -18,7 +18,7 @@
 
         .dashboard {
             display: flex;
-            justify-content: stretch; /* Expand dashboard horizontally */
+            justify-content: stretch; 
         }
 
         .sidebar {
@@ -59,14 +59,14 @@
             flex: 1;
             padding: 20px;
             display: flex;
-            justify-content: center; /* Center content horizontally */
-            align-items: center; /* Center content vertically */
+            justify-content: center; 
+            align-items: center; 
         }
 
         .main-content .image-container {
             text-align: center;
-            max-width: 100%; /* Ensure image doesn't overflow */
-            height: auto; /* Maintain aspect ratio */
+            max-width: 100%; 
+            height: auto; 
         }
 
         .main-content .image-container img {

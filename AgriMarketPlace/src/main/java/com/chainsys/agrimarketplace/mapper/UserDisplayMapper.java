@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.chainsys.agrimarketplace.model.User;
 
 public class UserDisplayMapper implements RowMapper<User> {
+	
 	@Override
 	public User mapRow(ResultSet resultSet, int i) throws SQLException {
 		User user = new User();

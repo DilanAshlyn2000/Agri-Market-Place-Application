@@ -29,5 +29,3 @@ public class ProductValidation {
 		return stockQuantity != null && stockQuantity.matches("[0-9]+");
 	}
 }
-
-

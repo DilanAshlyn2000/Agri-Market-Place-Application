@@ -338,16 +338,11 @@ th {
     function decrementQuantity(cartId, productId, price, quantity) {
         var quantityInput = document.getElementById('quantity-' + cartId);
         var currentQuantity = parseInt(quantityInput.value);
-        
-        // Ensure minimum quantity is 1
         if (currentQuantity > 1) {
             quantityInput.value = currentQuantity - 1;
             currentQuantity = currentQuantity - 1;
-
-            // AJAX call to update cart in backend
             updateCartItem(cartId, productId, price, currentQuantity);
         } else {
-            // Optionally handle minimum quantity reached
             console.log("Minimum quantity reached");
             alert("Minimum quantity reached");
         }
@@ -356,17 +351,11 @@ th {
     function incrementQuantity(cartId, productId, price, quantity) {
         var quantityInput = document.getElementById('quantity-' + cartId);
         var currentQuantity = parseInt(quantityInput.value);
-        
-        // Increment quantity
         quantityInput.value = currentQuantity + 1;
         currentQuantity = currentQuantity + 1;
-
-        // AJAX call to update cart in backend
         updateCartItem(cartId, productId, price, currentQuantity);
     }
-
     function updateCartItem(cartId, productId, price, quantity) {
-        // AJAX call to update cart in backend
         $.ajax({
             url: "/insertCart",
             type: "GET",
@@ -379,11 +368,11 @@ th {
             },
             success: function(response) {
                 console.log("Cart item updated successfully:", response);
-                updateTotalPrice(); // Update total price after successful update
+                updateTotalPrice(); 
             },
             error: function(xhr, status, error) {
                 console.error("Failed to update cart item:", error);
-                window.location.reload(); // Reload page on error
+                window.location.reload(); 
             }
         });
     }
@@ -396,22 +385,17 @@ th {
             var price = parseFloat(row.cells[2].textContent);
             var quantity = parseInt(row.cells[3].querySelector('.quantity-input').value);
             var total = price * quantity;
-            row.cells[4].textContent = total.toFixed(2); // Update total column
+            row.cells[4].textContent = total.toFixed(2); 
             totalSum += total;
         });
-
-        // Update total bill in the footer
         document.getElementById('totalBill').textContent = "Total Bill: " + totalSum.toFixed(2);
     }
 </script>
-
 </head>
-
 <body>
     <div class="text4">
         <h2><font color="#6f6e6c">CART</font><font color="#74ab4f">DETAILS</font></h2>
     </div>
-
     <table>
         <thead>
             <tr>
@@ -468,7 +452,6 @@ th {
             %>
         </tbody>
     </table>
-
     <table border="1">
         <thead>
             <tr>
@@ -476,7 +459,6 @@ th {
             </tr>
         </thead>
     </table>
-
     <form action="/confirmPage" method="get">
      <input type="hidden" name="customer_id" value="<%= id%>">
         <center>

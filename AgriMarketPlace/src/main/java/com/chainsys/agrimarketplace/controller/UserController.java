@@ -1,7 +1,6 @@
 package com.chainsys.agrimarketplace.controller;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,22 +38,18 @@ public class UserController {
 	public String saveUser(@RequestParam("name") String name, @RequestParam("type") String type,
 			@RequestParam("phone") String phone, @RequestParam("email") String email,
 			@RequestParam("address") String address, @RequestParam("password") String password, Model model) {
-
 		if (!Validation.isValidName(name)) {
 			model.addAttribute("error", "Invalid name format");
 			return "registrationPage.jsp";
 		}
-
 		if (!Validation.isValidPhone(phone)) {
 			model.addAttribute("error", "Invalid phone number format");
 			return "registrationPage.jsp";
 		}
-
 		if (!Validation.isValidEmail(email)) {
 			model.addAttribute("error", "Invalid email format");
 			return "registrationPage.jsp";
 		}
-
 		User user = new User();
 		user.setName(name);
 		user.setType(type);
@@ -62,15 +57,13 @@ public class UserController {
 		user.setEmail(email);
 		user.setAddress(address);
 		user.setPassword(password);
-
 		userDao.insertUser(user);
-
 		return "homePageUser.jsp";
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestParam("email") String email, @RequestParam("password") String password,	HttpSession session) {
-	
+	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
+			HttpSession session) {
 		User user = userDao.loginUser(email);
 		if (user != null) {
 			session.setAttribute("user", user.getId());
@@ -156,37 +149,30 @@ public class UserController {
 			@RequestParam("productName") String productName, @RequestParam("categoryId") String categoryId,
 			@RequestParam("fileToUpload") MultipartFile file, @RequestParam("description") String description,
 			@RequestParam("price") String price, @RequestParam("stockQuantity") String stockQuantity, Model model) {
-
 		if (!ProductValidation.isValidFarmerId(farmerId)) {
 			model.addAttribute("error", "Invalid farmer ID format");
 			return "addProduct.jsp";
 		}
-
 		if (!ProductValidation.isValidProductName(productName)) {
 			model.addAttribute("error", "Invalid product name format");
 			return "addProduct.jsp";
 		}
-
 		if (!ProductValidation.isValidCategoryId(categoryId)) {
 			model.addAttribute("error", "Invalid category ID format");
 			return "addProduct.jsp";
 		}
-
 		if (!ProductValidation.isValidDescription(description)) {
 			model.addAttribute("error", "Invalid description format");
 			return "addProduct.jsp";
 		}
-
 		if (!ProductValidation.isValidPrice(price)) {
 			model.addAttribute("error", "Invalid price format");
 			return "addProduct.jsp";
 		}
-
 		if (!ProductValidation.isValidStockQuantity(stockQuantity)) {
 			model.addAttribute("error", "Invalid stock quantity format");
 			return "addProduct.jsp";
 		}
-
 		byte[] imageBytes;
 		try {
 			imageBytes = file.getBytes();
@@ -203,7 +189,6 @@ public class UserController {
 		product.setDescription(description);
 		product.setPrice(Float.parseFloat(price));
 		product.setStockQuantity(Integer.parseInt(stockQuantity));
-
 		try {
 			userDao.insertProduct(product);
 		} catch (Exception e) {
@@ -211,7 +196,6 @@ public class UserController {
 			model.addAttribute("error", "Failed to save the product");
 			return "addProduct.jsp";
 		}
-
 		return "redirect:/farmerDashBoard.jsp";
 	}
 
@@ -231,76 +215,84 @@ public class UserController {
 		model.addAttribute("lists", products);
 		return "productsView.jsp";
 	}
+
 	@GetMapping("/displayProducts")
 	public String getAllProducts(Model model) {
 		List<Product> products = userDao.getAllProducts();
 		model.addAttribute("productList", products);
 		return "displayProductUser.jsp";
 	}
+
 	@GetMapping("/searchCategory")
-	public String searchCategory(@RequestParam("type") Integer categoryId,HttpSession session,Model model) {
-		session.setAttribute("type",categoryId);
+	public String searchCategory(@RequestParam("type") Integer categoryId, HttpSession session, Model model) {
+		session.setAttribute("type", categoryId);
 		List<Product> productList = userDao.searchCategory(categoryId);
 		model.addAttribute("productList", productList);
 		return "displayProductUser.jsp";
 	}
-	
-	 @GetMapping("/displayProductsLowToHigh")
-	  public String getAllProductsLowToHigh( @RequestParam("price1") Float price,HttpSession session,Model model) { 
-		  int type = (int)session.getAttribute("type");
-		  List<Product> products =userDao.getAllProductsLowToHigh( price,type);
-		  model.addAttribute("productList",products);
-		  return "displayProductUser.jsp";   
-}
-	 @GetMapping("/displayProductsHighToLow")
-	  public String getAllProductsHighToLow( @RequestParam("price1") Float price,HttpSession session, Model model) { 
-		  int type = (int)session.getAttribute("type");
-		  List<Product> products =userDao.getAllProductsHighToLow( price,type);
-		  model.addAttribute("productList",products);
-		  return "displayProductUser.jsp";  
-	 }
-	 @GetMapping("/insertCart")
-	    public String insertCart(@RequestParam("category_id") int customerId, @RequestParam("productId") int productId,@RequestParam("quantity") int quantity,@RequestParam("price") float total,@RequestParam("action") String action,HttpSession session,Model model ) {
-		int id = (int)session.getAttribute("user");
-		int type = (int)session.getAttribute("type");
+
+	@GetMapping("/displayProductsLowToHigh")
+	public String getAllProductsLowToHigh(@RequestParam("price1") Float price, HttpSession session, Model model) {
+		int type = (int) session.getAttribute("type");
+		List<Product> products = userDao.getAllProductsLowToHigh(price, type);
+		model.addAttribute("productList", products);
+		return "displayProductUser.jsp";
+	}
+
+	@GetMapping("/displayProductsHighToLow")
+	public String getAllProductsHighToLow(@RequestParam("price1") Float price, HttpSession session, Model model) {
+		int type = (int) session.getAttribute("type");
+		List<Product> products = userDao.getAllProductsHighToLow(price, type);
+		model.addAttribute("productList", products);
+		return "displayProductUser.jsp";
+	}
+
+	@GetMapping("/insertCart")
+	public String insertCart(@RequestParam("category_id") int customerId, @RequestParam("productId") int productId,
+			@RequestParam("quantity") int quantity, @RequestParam("price") float total,
+			@RequestParam("action") String action, HttpSession session, Model model) {
+		int id = (int) session.getAttribute("user");
+		int type = (int) session.getAttribute("type");
 		System.out.println(action);
 		System.out.println(id);
-		Cart cart=new Cart();
+		Cart cart = new Cart();
 		cart.setCustomerId(customerId);
 		cart.setProductId(productId);
 		cart.setQuantity(quantity);
-		cart.setTotal(total);	
-		userDao.insertCart(id,productId,quantity, total,action);
+		cart.setTotal(total);
+		userDao.insertCart(id, productId, quantity, total, action);
 		List<Product> products = userDao.searchCategory(type);
 		model.addAttribute("productList", products);
 		return "displayProductUser.jsp";
-     }
-		@GetMapping("/displayCart")
-		public String getAllCartDetails(@RequestParam("customer_id") int customerId,Model model) {
-			List<Cart> products = userDao.getAllCartDetails(customerId);
-			model.addAttribute("productList", products);
-			return "cartPage.jsp";
-		}
-		 @GetMapping("/deleteCart")
-		    public String deleteCart(@RequestParam("cartId") int cartId) {
-		        userDao.deleteCartById(cartId); 
-		        return "cartPage.jsp"; 
-		    }
-		 @GetMapping("/confirmPage")
-			public String confirmPage(@RequestParam("customer_id") int customerId,Model model) {
-				List<Cart> products = userDao.getAllCartDetails(customerId);
-				model.addAttribute("productList", products);
-				return "buyNowPage.jsp";
-			}
-		 @GetMapping("/updateStatus")
-		    public String updateCartStatus(@RequestParam("customer_id") int customerId, Model model) {
-		            Cart add1 = new Cart(); 
-		            add1.setCustomerId(customerId);
-		            userDao.updateStatus(add1);
-		          //model.addAttribute("message", "Cart status updated successfully.");
-		            return "homePageUser.jsp"; 
-		       
-		    }
-		 }
+	}
 
+	@GetMapping("/displayCart")
+	public String getAllCartDetails(@RequestParam("customer_id") int customerId, Model model) {
+		List<Cart> products = userDao.getAllCartDetails(customerId);
+		model.addAttribute("productList", products);
+		return "cartPage.jsp";
+	}
+
+	@GetMapping("/deleteCart")
+	public String deleteCart(@RequestParam("cartId") int cartId) {
+		userDao.deleteCartById(cartId);
+		return "cartPage.jsp";
+	}
+
+	@GetMapping("/confirmPage")
+	public String confirmPage(@RequestParam("customer_id") int customerId, Model model) {
+		List<Cart> products = userDao.getAllCartDetails(customerId);
+		model.addAttribute("productList", products);
+		return "buyNowPage.jsp";
+	}
+
+	@GetMapping("/updateStatus")
+	public String updateCartStatus(@RequestParam("customer_id") int customerId, Model model) {
+		Cart add1 = new Cart();
+		add1.setCustomerId(customerId);
+		userDao.updateStatus(add1);
+		// model.addAttribute("message", "Cart status updated successfully.");
+		return "homePageUser.jsp";
+	}
+}
 
