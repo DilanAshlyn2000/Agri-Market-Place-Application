@@ -1,6 +1,9 @@
 package com.chainsys.agrimarketplace.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.chainsys.agrimarketplace.mapper.UserMapper;
 import com.chainsys.agrimarketplace.mapper.UserDisplayMapper;
+import com.chainsys.agrimarketplace.mapper.CartMapper;
 import com.chainsys.agrimarketplace.mapper.CategoryMapper;
 import com.chainsys.agrimarketplace.mapper.ProductMapper;
 import com.chainsys.agrimarketplace.model.Cart;
@@ -138,6 +142,7 @@ public class UserImpl implements UserDao {
 	            return cart;
 	        });
 	    } catch (EmptyResultDataAccessException e) {
+	    	e.printStackTrace();
 	    }
 
 	    if (cartEntry != null) {
@@ -151,12 +156,36 @@ public class UserImpl implements UserDao {
 	        System.out.println("Inserting new entry into the cart.");
 	    }
 	}
-	/*public List<Product> getAllCartDetails() {
+	public List<Cart> getAllCartDetails(int customerId) {
 		String select =  "SELECT p.product_id,p.product_name, p.product_image, p.price, c.cart_id, c.quantity, (p.price * c.quantity) AS total "
-				+ "FROM Products p " + "JOIN Cart c ON p.product_id = c.product_id "
-				+ "WHERE status='UNPAID'";
-		List<Product> productList = jdbcTemplate.query(select, new ProductMapper());
-		System.out.println(productList);
+				+ "FROM products p " + "JOIN cart c ON p.product_id = c.product_id "
+				+ "WHERE c.customer_id = ? AND status='UNPAID' ";
+		List<Cart> productList =  jdbcTemplate.query(select,new CartMapper(),customerId);
 		return productList;
-	}*/
+	}
+	public void deleteCartById(int cartId) {
+        String deleteQuery = "DELETE FROM cart WHERE cart_id = ?";
+        jdbcTemplate.update(deleteQuery, cartId);
+    }
+	//@Transactional(rollbackFor = SQLException.class)
+    public void updateStatus(Cart add1)  {
+        // Update Cart status to 'PAID'
+        String updateCart = "UPDATE cart SET status = 'PAID' WHERE customer_id = ?";
+        jdbcTemplate.update(updateCart, add1.getCustomerId());
+
+        // Retrieve Cart items with status 'PAID'
+        String selectCartItems = "SELECT product_id, quantity FROM cart WHERE customer_id = ? AND status = 'PAID'";
+        List<Cart> cartItems = jdbcTemplate.query(selectCartItems, (rs, rowNum) -> {
+            Cart item = new Cart();
+            item.setProductId(rs.getInt("product_id"));
+            item.setQuantity(rs.getInt("quantity"));
+            return item;
+        }, add1.getCustomerId());
+
+        // Update Products table for each cart item
+        String updateProduct = "UPDATE products SET stock_quantity = stock_quantity - ? WHERE product_id = ?";
+        for (Cart item : cartItems) {
+            jdbcTemplate.update(updateProduct, item.getQuantity(), item.getProductId());
+        }
+    }
 }

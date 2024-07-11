@@ -2,6 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="com.chainsys.agrimarketplace.model.Product"%>
 <%@ page import="java.util.*"%>
+<% 
+session=request.getSession(false); 
+int id=(int)session.getAttribute("user");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,6 +149,8 @@ select {
     position: relative;
     top: -900px;
     left: 765px;
+    }
+ 
 </style>
 </head>
 <body>
@@ -156,7 +162,8 @@ select {
 		</h2>
 	</div>
 		
-		<form action="CartView" method="get">
+		<form action="/displayCart" method="get">
+		  <input type="hidden" name="customer_id" value="<%= id%>">
 			<input type="image" src="pictures/q7.jpg" alt="Submit">
 		</form>
 		<div class="card-container">
@@ -198,7 +205,7 @@ select {
 								  <input type="hidden" value="<%=product.getProductId()%>" name="productId">
 								  <input type="hidden" value="<%=product.getFarmerId()%>" name="farmerId">
 								  <input type="hidden" value="<%=product.getPrice()%>" name="price">
-								  <input type="hidden" value="<%=product.getCategoryId()%>" name="category_id">	
+								  <input type="hidden" value="<%=id%>" name="category_id">	
 								 <input type="hidden" value="add" name="action">
 								<button class="#">Add to Cart</button>
 							</div>
@@ -209,30 +216,31 @@ select {
 			<%
             }
 			%>
-			
+			<div class="container">
 			<div class="low">
 			<form action="/displayProductsLowToHigh" method="get">
 				<% for (Product product : productList) { %>
 				<input type="hidden" value="<%= product.getPrice() %>" name="price1">
 				<% } %>
-				<select id="type" name="type" required autofocus>
+			<!-- 	<select id="type" name="type" required autofocus>
 					<option value="2">VEGETABLES</option>
 					<option value="1">FRUITS</option>
 					<option value="4">GRAINS & CEREALS</option>
-					<option value="3">NUTS</option>
+					<option value="3">NUTS</option> -->
 				</select> <input type="submit" value="SORT LOW TO HIGH" class="button2">
 			</form>
 			<form action="/displayProductsHighToLow" method="get">
 				<% for (Product product : productList) { %>
 				<input type="hidden" value="<%= product.getPrice() %>" name="price1">
 				<% } %>
-				<select id="type" name="type" required autofocus>
+				<!-- <select id="type" name="type" required autofocus>
 					<option value="2">VEGETABLES</option>
 					<option value="1">FRUITS</option>
 					<option value="4">GRAINS & CEREALS</option>
-					<option value="3">NUTS</option>
+					<option value="3">NUTS</option> -->
 				</select> <input type="submit" value="SORT HIGH TO LOW" class="button2">
 				</form>
 			</div>	
+			</div>
         </body>
 </html>  

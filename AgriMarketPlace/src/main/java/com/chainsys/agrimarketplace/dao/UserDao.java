@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.chainsys.agrimarketplace.model.Cart;
 import com.chainsys.agrimarketplace.model.Category;
 import com.chainsys.agrimarketplace.model.Product;
 import com.chainsys.agrimarketplace.model.User;
@@ -42,5 +43,9 @@ public interface UserDao {
 	
 	public void insertCart(int customerId, int productId, int quantity, float total, String action);
 	
-	//public List<Product> getAllCartDetails();
+	public List<Cart> getAllCartDetails(int customerId);
+	
+	public void deleteCartById(int cartId);
+	
+	  public void updateStatus(Cart add1) ;
 }

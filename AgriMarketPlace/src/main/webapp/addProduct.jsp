@@ -145,7 +145,7 @@ nav {
 				<option value="">Select Category</option>
 				<option value="2">Vegetables</option>
 				<option value="1">Fruits</option>
-				<option value="4">GRAINS & CEREALS</option>
+				<option value="4">Grains & Cereals</option>
 				<option value="3">Nuts</option>
 			</select>
 			

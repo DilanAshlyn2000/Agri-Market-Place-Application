@@ -23,7 +23,7 @@ body {
 .card {
 	width: calc(50% - 40px);
 	/* Adjust width to fit two cards in a row with some margin */
-	height: 250px; /* Set a fixed height for the card */
+	height: 236px; /* Set a fixed height for the card */
 	margin: 20px;
 	background-color: #fff;
 	border-radius: 8px;
@@ -197,7 +197,7 @@ nav {
 			<p>FRUITS</p>
 		</div>
 		<div class="card" onclick="selectCategory(4)">
-			<img src=https://cdn.pixabay.com/photo/2017/02/08/10/08/tulips-2048324_1280.jpg alt="Flowers">
+			<img src=https://st5.depositphotos.com/14096468/67729/i/450/depositphotos_677297868-stock-photo-different-types-legumes-bowls-green.jpg alt="Flowers">
 			<p>GRAINS & CEREALS</p>
 		</div>
 		<div class="card" onclick="selectCategory(3)">
