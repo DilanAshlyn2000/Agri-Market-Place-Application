@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +56,7 @@ colour:white;
 					<ul class="navbar-nav me-auto">
 						<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="marketView.jsp">Market</a>
+						<li class="nav-item"><a class="nav-link" href="/orderHistory">Order History</a>
 						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
@@ -234,4 +236,4 @@ colour:white;
     }
 </script>
 </body>
-</html>
+</html> 

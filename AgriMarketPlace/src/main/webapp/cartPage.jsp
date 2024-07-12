@@ -330,6 +330,87 @@ th {
     font-family: bold;
     font-size:30px;
     }
+.container1 {
+    position: relative;
+    top: -900px;
+    left: 765px;
+    }
+ 
+header {
+	background-color: #333;
+	color: #fff;
+}
+
+nav {
+	padding: 0px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo {
+	font-size: 1.5rem;
+	width: 251px;
+}
+
+.content {
+	padding: 20px;
+}
+
+.header1 {
+	background-color: white;
+	color: black;
+}
+
+.nav-links {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+}
+
+.nav-links li {
+	margin-right: 20px;
+}
+
+.nav-links li a {
+	text-decoration: none;
+	color: #000;
+	transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+	color: olive;
+}
+
+.dropdown {
+	position: relative;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown-content a {
+	color: #000;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+ 
 </style>
 
 <script
@@ -393,6 +474,24 @@ th {
 </script>
 </head>
 <body>
+<header class="header1">
+		<nav>
+			<a href="#" class="logo"> <img src="pictures/Screenshot (188).png"
+				alt="Logo" class="logo"></a>
+			<ul class="nav-links">
+				<li><a href="homePageUser.jsp">Home</a></li>
+
+				<li><a href="marketView.jsp">Market</a></li>
+				<li class="dropdown"><a href="#">About Us</a>
+					<div class="dropdown-content">
+						<a href="OurPeople.html">Our Team</a> <a href="OurCompany.html">Our
+							Company</a>
+					</div></li>
+
+
+			</ul>
+		</nav>
+	</header>
     <div class="text4">
         <h2><font color="#6f6e6c">CART</font><font color="#74ab4f">DETAILS</font></h2>
     </div>

@@ -47,4 +47,8 @@ public interface UserDao {
 	public void deleteCartById(int cartId);
 
 	public void updateStatus(Cart add1);
+	
+	 public List<Cart> userOrderHistory(int customerId);
+	 
+	 public List<Cart> userOrderHistoryFarmer(int farmerId);
 }

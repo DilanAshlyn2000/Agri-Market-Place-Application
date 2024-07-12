@@ -138,7 +138,7 @@ nav {
 			<input type="number" id="farmerId" name="farmerId" placeholder="Enter Farmer ID" min="1" pattern="[0-9]+" required>
 			
 			<label for="productName">Product Name:</label>
-			<input type="text" id="productName" name="productName" placeholder="Enter Product Name"  pattern="[a-zA-Z\\s]+" required>
+			<input type="text" id="productName" name="productName" placeholder="Enter Product Name"  pattern="^[a-zA-Z\s]+$" required>
 			
 			<label for="categoryId">Category:</label>
 			<select id="categoryId" name="categoryId" required>

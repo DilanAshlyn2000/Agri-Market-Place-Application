@@ -20,6 +20,7 @@ public class CartMapper implements RowMapper<Cart> {
         cart.setCartId(resultSet.getInt("c.cart_id"));
         cart.setQuantity(resultSet.getInt("c.quantity"));	
         cart.setTotal(resultSet.getFloat("total"));
+        cart.setDate(resultSet.getString("timestamp"));
         return cart;
     }
 }

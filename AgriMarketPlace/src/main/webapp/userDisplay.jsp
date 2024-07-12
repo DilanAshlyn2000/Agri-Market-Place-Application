@@ -10,7 +10,7 @@
 <title>All User Details</title>
 </head>
 <style>
-body {
+ body {
 	font-family: Arial, sans-serif;
 	line-height: 1.6;
 	background-color: #f9f9f9;
@@ -139,4 +139,4 @@ button:hover {
 		</tbody>
 	</table>
 </body>
-</html>
+</html> 

@@ -7,9 +7,9 @@ public class Cart {
 	int quantity;
 	float unitPrice;
 	float total;
+	String date;
 	Product product;
 	Float bill;
-
 	public int getCartId() {
 		return cartId;
 	}
@@ -73,4 +73,13 @@ public class Cart {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
 }

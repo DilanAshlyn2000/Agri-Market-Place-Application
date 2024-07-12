@@ -274,7 +274,10 @@ public class UserController {
 	}
 
 	@GetMapping("/deleteCart")
-	public String deleteCart(@RequestParam("cartId") int cartId) {
+	public String deleteCart(@RequestParam("cartId") int cartId,HttpSession session,Model model) {
+		int customerId = (int) session.getAttribute("user");
+		List<Cart> products = userDao.getAllCartDetails(customerId);
+		model.addAttribute("productList", products);
 		userDao.deleteCartById(cartId);
 		return "cartPage.jsp";
 	}
@@ -293,6 +296,20 @@ public class UserController {
 		userDao.updateStatus(add1);
 		// model.addAttribute("message", "Cart status updated successfully.");
 		return "homePageUser.jsp";
+	}
+	@GetMapping("/orderHistory")
+	public String userOrderHistory(HttpSession session,Model model) {
+		int customerId = (int) session.getAttribute("user");
+		List<Cart> products = userDao.userOrderHistory(customerId);
+		model.addAttribute("productList", products);
+		return "userOrderHistory.jsp";
+	}
+	@GetMapping("/orderHistoryFarmer")
+	public String userOrderFarmer(HttpSession session,Model model) {
+		int FarmerId = (int) session.getAttribute("user");
+		List<Cart> products = userDao.userOrderHistoryFarmer(FarmerId);
+		model.addAttribute("productList", products);
+		return "transactionHistory.jsp";
 	}
 }
 
