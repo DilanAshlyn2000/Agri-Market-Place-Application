@@ -3,7 +3,7 @@ package com.chainsys.agrimarketplace.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
+import javax.swing.tree.RowMapper;
 
 import com.chainsys.agrimarketplace.model.Cart;
 import com.chainsys.agrimarketplace.model.Product;
